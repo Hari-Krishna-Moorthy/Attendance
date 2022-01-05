@@ -1,4 +1,4 @@
 # Attendence
 
 ## Check list
--[ ] check box
+- [x]] check box
