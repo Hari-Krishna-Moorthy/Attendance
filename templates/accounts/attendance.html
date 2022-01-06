@@ -5,24 +5,22 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
-                {{ u_form|crispy }}
-                {{ p_form|crispy }}
+                <legend class="border-bottom mb-4"></legend>
+                {{ form|crispy }}
             </fieldset>
             <div class="form-group">
+                <div class="row"> 
+                    <div class="col-lg-1"> </div>
+                </div>
+
                 <div class="row"> 
                     <div class="col-lg-4"> </div>
                     <div class="col-lg-1"> </div>
                     <div class="col-lg-4"> 
-                        <button class="btn btn-lg btn-primary" style="" type="submit">Sign Up</button>
+                        <button class="btn btn-lg btn-primary" type="submit">Submit</button>
                     </div>
                 </div>
             </div>
         </form>
-        <div class=" pt-3">
-            <small class="text-muted">
-                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-            </small>
-        </div>
     </div>
 {% endblock content %}

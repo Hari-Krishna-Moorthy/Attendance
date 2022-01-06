@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        {% for user in users %}
+            <li> {{user}} </li>
+        {% endfor %}
+    </div>
+
+
+<a href="{% url 'get-attendance-sheet' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">
+    Gendrate Attendance
+</a>
+
+{% endblock content %}
+

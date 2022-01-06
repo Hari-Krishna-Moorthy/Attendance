@@ -6,12 +6,21 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     
-
+    
         <div class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <a href="{% url 'attendance' %}" class="btn btn-outline-primary my-2 my-sm-0">Attendance</a>
+            
           {% if request.user.is_authenticated %}
                 <div>
-                    <a href="{% url 'profile' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">Profile</a> 
-                    <a href="{% url 'logout' %}" class="btn btn-outline-primary my-2 my-sm-0">Logout</a>
+                    {% if request.user.is_staff %}
+                        <a href="{% url 'attendance-today' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">
+                            Today's Attendance
+                        </a>
+                        <a href="{% url 'profilelist' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">
+                            Profiles
+                        </a> 
+                    {% endif %}    
+                <a href="{% url 'logout' %}" class="btn btn-outline-primary my-2 my-sm-0">Logout</a>
                 </div>
             {% else %}
                 <div>
