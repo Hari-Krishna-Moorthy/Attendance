@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <h3> Choose the username to edit </h3>
+
+        {% for username, userid in userlist%}
+            <li> <a href="/profile/{{userid}}"> {{username}} </a> </li>
+        {% endfor %}
+    </div>
+{% endblock content %}
+
+
+
+
