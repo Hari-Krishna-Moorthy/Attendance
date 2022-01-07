@@ -8,7 +8,7 @@
     
     
         <div class="navbar-nav flex-row flex-wrap ms-md-auto">
-            <a href="{% url 'attendance' %}" class="btn btn-outline-primary my-2 my-sm-0">Attendance</a>
+            <a href="{% url 'attendance' %}" class="btn btn-primary btn-lg">Attendance</a>
             
           {% if request.user.is_authenticated %}
                 <div>
@@ -20,7 +20,7 @@
                             Profiles
                         </a> 
                     {% endif %}    
-                <a href="{% url 'logout' %}" class="btn btn-outline-primary my-2 my-sm-0">Logout</a>
+                        <a href="{% url 'logout' %}" class="btn btn-outline-primary my-2 my-sm-0">Logout</a>
                 </div>
             {% else %}
                 <div>
