@@ -74,29 +74,19 @@ class ProfileUpdateForm(forms.ModelForm):
             #         'form-control-file',
             #     )
             # })
-
-attendance_choices = (
-    ('present', 'Present'),
-    ('absent', 'Absent'),
-)
-
     
 class Attendanceform(forms.ModelForm):
     roll_number = forms.CharField()
-    attendance = forms.ChoiceField(widget = forms.Select(), 
-                                   choices = attendance_choices, initial='2', required = True,)
     class Meta:
         model = Attendance
-        fields = ('roll_number', 'attendance',)
+        fields = ('roll_number', )
 
     
 class AttendanceRFidform(forms.ModelForm):
     rfid = forms.CharField()
-    attendance = forms.ChoiceField(widget = forms.Select(), 
-                                   choices = attendance_choices, initial='2', required = True,)
     class Meta:
         model = Attendance
-        fields = ('rfid', 'attendance',)
+        fields = ('rfid', )
 
         
     

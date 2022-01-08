@@ -103,14 +103,15 @@ def attendance(request):
         attend = a_form.save(commit=False)
         
         if 'roll_number' in request.POST:
-            profile = Profile.objects.filter(roll_number=request.POST['roll_number'])[0]
+            profile = Profile.objects.filter(roll_number=request.POST['roll_number'])
             if not profile:
                 messages.error(request, f"Rollnumber couldn't found")
                 return redirect('attendance')
-            if Attendance.objects.filter(date=datetime.today(), profile_id=profile.id) :
+            if Attendance.objects.filter(date=datetime.today(), profile_id=profile[0].id) :
                 messages.error(request, f"Already attendance added")
                 return redirect('attendance')
             
+            profile = profile[0]
             attend.profile = profile
             attend.save()
             
