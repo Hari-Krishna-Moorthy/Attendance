@@ -88,7 +88,15 @@ class Attendanceform(forms.ModelForm):
     class Meta:
         model = Attendance
         fields = ('roll_number', 'attendance',)
-        
+
     
+class AttendanceRFidform(forms.ModelForm):
+    rfid = forms.CharField()
+    attendance = forms.ChoiceField(widget = forms.Select(), 
+                                   choices = attendance_choices, initial='2', required = True,)
+    class Meta:
+        model = Attendance
+        fields = ('rfid', 'attendance',)
+
         
     
