@@ -22,10 +22,18 @@
 
 **User** 
 - [x] login  (using roll number)
-- [ ] RF id writing page  (using RF UUid)
-- [ ] mail users while attendance taken  
+- [x] RF id writing page  (using RF UUid)
+        curl -X POST -d "rfid=21iojiqejio12ejoi2ejio12" http://127.0.0.1:8000/attendance/rfid/
+
+- [x] mail users while attendance taken  
 
  
 **About us page**
 
  
+
+
+#### Send post request 
+**sample**
+
+curl -d '{"rfid" : "asioasniooasioisaias"}'  --header "Content-Type: application/json" --request POST http://127.0.0.1:8000/attendance/rfid/

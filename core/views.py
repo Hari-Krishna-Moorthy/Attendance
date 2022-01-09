@@ -1,7 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from core.forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, Attendanceform
+from core.forms import ( 
+    UserRegisterForm, 
+    UserUpdateForm, 
+    ProfileUpdateForm, 
+    Attendanceform, 
+    AttendanceRFidform,
+)
 from core.models import Attendance, Profile
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.generic.edit import CreateView
@@ -9,9 +15,18 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 
 from django.core.exceptions import ObjectDoesNotExist
-
+from django.core.mail import EmailMessage
 from datetime import datetime 
 import csv
+
+import geocoder
+
+from django.core.exceptions import BadRequest
+
+from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 
 def register(request):
     if request.method == 'POST':
@@ -82,27 +97,34 @@ def home_view(request):
     content = {"title" : "Home" }
     return render(request, 'index.html', content)
 
-
 def attendance(request):
     if request.method == "POST":
         a_form = Attendanceform(request.POST)
         attend = a_form.save(commit=False)
         
         if 'roll_number' in request.POST:
-            profile = Profile.objects.filter(roll_number=request.POST['roll_number'])[0]
+            profile = Profile.objects.filter(roll_number=request.POST['roll_number'])
             if not profile:
                 messages.error(request, f"Rollnumber couldn't found")
                 return redirect('attendance')
-            if Attendance.objects.filter(date=datetime.today(), profile_id=profile.id) :
+            if Attendance.objects.filter(date=datetime.today(), profile_id=profile[0].id) :
                 messages.error(request, f"Already attendance added")
                 return redirect('attendance')
             
+            profile = profile[0]
             attend.profile = profile
             attend.save()
             
         if a_form.is_valid():
             a_form.save()
             messages.success(request, f'Succufully added Attendance!')
+            email_body = "Your ward {} - {} Accessed college bus at {}".format(
+                attend.profile.user.username, 
+                attend.profile.roll_number,
+                datetime.now().strftime("%D/ - %H:%m"))
+            
+            email = EmailMessage('Transport - SECE', email_body, to=[attend.profile.user.email])
+            email.send()
             return redirect('attendance')
         return redirect('attendance')
     else:
@@ -111,7 +133,29 @@ def attendance(request):
             'form' : a_form
         }
         return render(request, 'accounts/attendance.html', content)        
-            
+
+@api_view(["POST"])
+def attendance_rfid(request):
+    try:
+        print(request.data["rfid"])
+        profile = Profile.objects.get(rfid=request.data['rfid'])
+        if Attendance.objects.filter(date=datetime.today(), profile_id=profile.id):
+            return Response( {"message" : "Already attendance added"}, status=HTTP_404_NOT_FOUND)
+        
+        attend = Attendance.objects.create(profile=profile, date=datetime.today())
+        attend.profile = profile
+        attend.location = 'None'
+        attend.save()
+        email_body = "Your ward {} - {} Accessed college bus at {}".format(
+            attend.profile.user.username, 
+            attend.profile.roll_number,
+            datetime.now().strftime("%D/ - %H:%m"))
+        
+        email = EmailMessage('Transport - SECE', email_body, to=[attend.profile.user.email])
+        email.send()
+        return Response( {"message" : "Succufully added Attendance!"}, status=HTTP_200_OK)
+    except ObjectDoesNotExist:
+        return Response( {"message" : "Attendance Couldn't added"}, status=HTTP_404_NOT_FOUND)
         
     
 def attendanceListToday(request):
@@ -146,6 +190,10 @@ def get_attendance_sheet(request):
                          user.email, 
                          "Paid" if profile.is_fees_paid else "Not Paid",
                          attendance_status
-                         ])  
-        
+                         ])
     return response  
+
+
+
+def aboutus(request):
+    return render(request, 'aboutus.html' , {})

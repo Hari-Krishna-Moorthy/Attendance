@@ -47,7 +47,8 @@ attendance_choices = (
 
 class Attendance(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, blank=True, null=True)
-    attendance = models.CharField(max_length=8, choices=attendance_choices, default = '[    resent', blank=True)
+    attendance = models.CharField(max_length=8, choices=attendance_choices, default = 'present', blank=True)
+    location = models.CharField(max_length=100, blank=True, null=True)
     date = models.DateField(default=datetime.today, blank=True)
 
     def __str__(self):
