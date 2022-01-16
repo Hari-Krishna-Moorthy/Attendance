@@ -36,4 +36,10 @@
 #### Send post request 
 **sample**
 
-curl -d '{"rfid" : "asioasniooasioisaias"}'  --header "Content-Type: application/json" --request POST http://127.0.0.1:8000/attendance/rfid/
+curl -d '{"rfid" : "21iojiqejio12ejoi2ejio12"}'  --header "Content-Type: application/json" --request POST http://127.0.0.1:8000/attendance/rfid/
+
+
+# Changes
+        - Datetime in http://127.0.0.1:8000/attendance-today/
+        - Format CSV : username, Roll Number, Department, Bus Number, email, Attendance Status, Date Time, Fees Paid Status
+        - Date time format DD/MMM, YYYY HH:MM:SS

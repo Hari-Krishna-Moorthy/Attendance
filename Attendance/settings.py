@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     
-    'core.apps.CoreConfig'
+    'core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +151,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'sjrproject2022@gmail.com'
 EMAIL_HOST_PASSWORD = 'Project@2022'
 EMAIL_PORT = 587
+
+
+

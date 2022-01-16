@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from PIL import Image
 from os.path import join, exists
 from os import remove
-from datetime import datetime
+from datetime import timedelta
+from django.utils import timezone
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
@@ -49,9 +50,11 @@ class Attendance(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, blank=True, null=True)
     attendance = models.CharField(max_length=8, choices=attendance_choices, default = 'present', blank=True)
     location = models.CharField(max_length=100, blank=True, null=True)
-    date = models.DateField(default=datetime.today, blank=True)
+    date = models.DateTimeField(default=timezone.now, blank=True)
 
     def __str__(self):
-        return "{} {}".format(self.profile.user.username, self.date.strftime("%d %b, %Y"))
-        # return self.profile.user.username + 
+        self.date += timedelta(hours=5, minutes=30)
+        return "{} {}".format(
+            self.profile.user.username, 
+            self.date.strftime("%d %b, %Y %I:%M %p"))
     

@@ -2,15 +2,46 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
-        {% for user in users %}
-            <li> {{user}} </li>
-        {% endfor %}
+        <table class="table table-hover table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+             {% for count,user, time in users %}
+    
+              <tr>
+                <th scope="row">{{count}}</th>
+                <td>{{user}}</td>
+                <td>{{time}}</td>
+              </tr>
+            {% endfor %}
+    
+            </tbody>
+          </table>
     </div>
 
+    
+    <div class="row"> 
+      <div class="col-lg-3"> 
+        
+      </div>
+      <div class="col-lg-3"> 
+        <a href="{% url 'attendance-update' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">
+          Update Attendance
+        </a>
+      </div>
+      <div class="col-lg-4"> 
+        <a href="{% url 'get-attendance-sheet' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">
+          Gendrate Attendance
+        </a>
+      </div>
+  </div>
 
-<a href="{% url 'get-attendance-sheet' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">
-    Gendrate Attendance
-</a>
+
 
 {% endblock content %}
 

@@ -7,6 +7,7 @@ from core.views import (
     home_view, 
     attendance,
     attendanceListToday, 
+    attendance_update,
     get_attendance_sheet,
     aboutus,
     attendance_rfid
@@ -23,6 +24,7 @@ urlpatterns = [
     path('attendance/', attendance, name='attendance'),
     path('attendance/rfid/', attendance_rfid, name='attendance-rfid'),
     path('attendance-today/', attendanceListToday, name='attendance-today'),
+    path('attendance-update/', attendance_update, name='attendance-update'),
     path('get-attendance-sheet', get_attendance_sheet, name='get-attendance-sheet'),
     path('aboutus', aboutus, name='aboutus'),    
 ]

@@ -2,11 +2,30 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
+
         <h3> Choose the username to edit </h3>
 
-        {% for username, userid in userlist%}
-            <li> <a href="/profile/{{userid}}"> {{username}} </a> </li>
-        {% endfor %}
+        <div class="row">
+            <div class="col-lg-6">
+                <ul class="list-group list-group-flush">
+        
+                    {% for username, userid in userlist%}
+                        <a  
+                            href="/profile/{{userid}}" 
+                            class="list-group-item list-group-item-light  list-group-item-action "
+                            
+                        > 
+                            {{username}} 
+                        </a> 
+                    {% endfor %}
+                
+                </ul>
+        
+            </div>            
+        </div>
+
+        
+        
     </div>
 {% endblock content %}
 
