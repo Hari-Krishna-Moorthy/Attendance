@@ -19,7 +19,6 @@ from django.core.mail import EmailMessage
 from datetime import datetime, date, timedelta
 import csv
 
-import geocoder
 
 from django.core.exceptions import BadRequest
 
