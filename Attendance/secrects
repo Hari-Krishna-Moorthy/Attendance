@@ -2,8 +2,8 @@ heroku config:set Mail_username="sjrproject2022@gmail.com"
 heroku config:set Mail_password="Project@2022"
 
 heroku config:set DISABLE_COLLECTSTATIC=1
-
-git push heroku master
+heroku buildpacks:set heroku/python
+git push heroku main
 
 heroku run python manage.py makemigrations
 heroku run python manage.py migrate
