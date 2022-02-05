@@ -12,5 +12,5 @@ pycryptodome
 # rename crypto
 
 requests_toolbelt
-
-
+gunicorn
+django-heroku 
