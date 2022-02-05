@@ -53,7 +53,7 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['image', 'roll_number', 'department', 'bus_number', 'rfid',]
+        fields = ['image', 'roll_number', 'department', 'bus_number', 'rfid', 'is_fees_paid']
     
     
     def __init__(self, *args, **kwargs):
@@ -69,6 +69,7 @@ class ProfileUpdateForm(forms.ModelForm):
                     'focus:border-gray-500'
                 )
             })
+            
             # self.fields['image'].widget.attrs.update({
             #     'class' : (
             #         'form-control-file',

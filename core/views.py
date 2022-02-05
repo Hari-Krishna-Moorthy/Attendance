@@ -19,7 +19,7 @@ from django.core.mail import EmailMessage
 from datetime import datetime, date, timedelta
 import csv
 
-import geocoder
+# import geocoder
 
 from django.core.exceptions import BadRequest
 
@@ -122,6 +122,8 @@ def attendance_update(request):
     today = datetime.today().strftime("%d-%m-%Y")
     
     today_attendance = db.child(today).get().val()
+    if today_attendance.items() is NoneType :
+        redirect("/")
     # print(today_attendance)
     # print(today_attendance.items())
     if today_attendance.items():
@@ -155,7 +157,7 @@ def attendance_rfid_firebase(date_time=None, rfid=None):
     email_body = "Your ward {} - {} Accessed college bus at {}".format(
             attend.profile.user.username, 
             attend.profile.roll_number,
-            date1.strftime("%d/%m/%Y - %H:%M"))
+            date1.strftime("%dth %B %Y - %H:%M %p")) 
     email = EmailMessage('Transport - SECE', email_body, to=[attend.profile.user.email])
     email.send()
         
@@ -188,7 +190,7 @@ def attendance(request):
             email_body = "Your ward {} - {} Accessed college bus at {}".format(
                 attend.profile.user.username, 
                 attend.profile.roll_number,
-                datetime.now().strftime("%D/ - %H:%m"))
+                datetime.now().strftime("%dth %B %Y - %H:%M %p"))
             
             email = EmailMessage('Transport - SECE', email_body, to=[attend.profile.user.email])
             email.send()
@@ -219,7 +221,7 @@ def attendance_rfid(request):
         email_body = "Your ward {} - {} Accessed college bus at {}".format(
             attend.profile.user.username, 
             attend.profile.roll_number,
-            datetime.now().strftime("%D/ - %H:%m"))
+            datetime.now().strftime("%dth %B %Y - %H:%M %p"))
         
         email = EmailMessage('Transport - SECE', email_body, to=[attend.profile.user.email])
         email.send()
