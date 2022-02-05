@@ -3,11 +3,13 @@ heroku config:set Mail_password="Project@2022"
 
 heroku config:set DISABLE_COLLECTSTATIC=1
 heroku buildpacks:set heroku/python
-git push heroku main
+git push heroku master
 
 heroku run python manage.py makemigrations
 heroku run python manage.py migrate
+heroku run pip install -r requirement.txt
 
 heroku run 'bower install --config.interactive=false;grunt prep;python manage.py collectstatic --noinput'
 heroku config:unset DISABLE_COLLECTSTATIC
 heroku run python manage.py collectstatic
+heroku run python manage.py createsuperuser --username root --email root@email.com
