@@ -153,4 +153,7 @@ EMAIL_HOST_PASSWORD =  os.environ['Mail_password']
 EMAIL_PORT = 587
 
 
+import django_heroku
+django_heroku.settings(locals())
+
 
