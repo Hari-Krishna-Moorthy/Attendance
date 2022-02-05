@@ -16,7 +16,8 @@ config = {
   "measurementId": "G-EQ2B54C9HX"
 }
 
-API_ENDPOINT = 'http://127.0.0.1:8000/attendance/rfid/'
+# API_ENDPOINT = 'http://127.0.0.1:8000/attendance/rfid/'
+API_ENDPOINT = 'https://smart-bus-monitoring-app-sece.herokuapp.com/attendance/rfid/' 
 
 firebase = Firebase(config)
 db = firebase.database()

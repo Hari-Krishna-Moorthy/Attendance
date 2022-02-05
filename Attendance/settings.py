@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-!=e+-tx_$5b8306!w+gf2b=_a2-!tpv&1=%ho&x_nff9l#l%ib
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -148,9 +148,14 @@ USE_TZ = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'sjrproject2022@gmail.com'
-EMAIL_HOST_PASSWORD = 'Project@2022'
+# EMAIL_HOST_USER =  os.environ['Mail_username']
+# EMAIL_HOST_PASSWORD =  os.environ['Mail_password']
+EMAIL_HOST_USER =  'sjrproject2022@gmail.com'
+EMAIL_HOST_PASSWORD =  'Project@2022'
 EMAIL_PORT = 587
 
+
+# import django_heroku
+# django_heroku.settings(locals())
 
 
