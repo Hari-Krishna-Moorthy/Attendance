@@ -14,5 +14,3 @@ heroku run 'bower install --config.interactive=false;grunt prep;python manage.py
 heroku config:unset DISABLE_COLLECTSTATIC
 heroku run python manage.py collectstatic
 heroku run python manage.py createsuperuser --username root --email root@email.com
-
-smart-bus-monitoring-app-sece
