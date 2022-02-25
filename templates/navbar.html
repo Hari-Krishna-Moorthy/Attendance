@@ -1,16 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <h1> 
-        <a class="navbar-brand badge badge-primary" href="/">Attendance System</a>
+        <a class="navbar-brand badge badge-primary" href="/">EIBMS</a>
     </h1>
         <div class="navbar-nav flex-row flex-wrap ms-md-auto">
             <div>
-                <a href="{% url 'attendance' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">Attendance</a>
+                <a href="{% url 'attendance' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">Check In</a>
             </div>
                 {% if request.user.is_authenticated %}
                 <div>
                     {% if request.user.is_staff %}
                         <a href="{% url 'attendance-today' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">
-                            Today's Attendance
+                            Check Out
                         </a>
                         <a href="{% url 'profilelist' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">
                             Profiles

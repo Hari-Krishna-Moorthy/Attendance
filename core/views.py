@@ -177,7 +177,16 @@ def attendance(request):
             for attendance in attendances:
                 attendance.date += timedelta(hours=5, minutes=30)
                 if attendance.date.date() == date.today():
-                    messages.error(request, f"Already attendance added")
+                    messages.warning(request, f"Attendance Updated Succesfully")
+                    attendance.date = datetime.now()
+                    attendance.save()
+                    email_body = "Your ward {} - {} Accessed college bus at {}".format(
+                    attendance.profile.user.username, 
+                    attendance.profile.roll_number,
+                    datetime.now().strftime("%dth %B %Y - %H:%M %p"))
+            
+                    email = EmailMessage('Transport - SECE', email_body, to=[attendance.profile.user.email])
+                    email.send()
                     return redirect('attendance')
             
             profile = profile[0]
@@ -211,7 +220,15 @@ def attendance_rfid(request):
         for attendance in attendances:
             attendance.date += timedelta(hours=5, minutes=30)
             if attendance.date.date() == date.today():
-                return Response( {"message" : "Already attendance added"}, status=HTTP_404_NOT_FOUND)
+                email_body = "Your ward {} - {} Accessed college bus at {}".format(
+                attendance.profile.user.username, 
+                attendance.profile.roll_number,
+                datetime.now().strftime("%dth %B %Y - %H:%M %p"))
+                attendance.date = datetime.now()
+                attendance.save()
+                email = EmailMessage('Transport - SECE', email_body, to=[attendance.profile.user.email])
+                email.send()
+                return Response( {"message" : "Attendance Updated Succesfully"}, status=HTTP_200_OK)
                 
         
         attend = Attendance.objects.create(profile=profile, date=datetime.today())
