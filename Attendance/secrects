@@ -4,8 +4,7 @@ heroku config:set Mail_password="Project@2022"
 heroku config:set DISABLE_COLLECTSTATIC=1
 heroku buildpacks:set heroku/python
 git push heroku master
-heroku run pip install -r requirement.txt
-
+heroku run pip install -r requirements.txt
 
 heroku run python manage.py makemigrations
 heroku run python manage.py migrate
