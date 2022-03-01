@@ -4,13 +4,13 @@
     </h1>
         <div class="navbar-nav flex-row flex-wrap ms-md-auto">
             <div>
-                <a href="{% url 'attendance' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">Check In</a>
+                <a href="{% url 'attendance' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">Check In/Out</a>
             </div>
                 {% if request.user.is_authenticated %}
                 <div>
                     {% if request.user.is_staff %}
                         <a href="{% url 'attendance-today' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">
-                            Check Out
+                            Today's Attendance
                         </a>
                         <a href="{% url 'profilelist' %}" class="text-end btn btn-outline-primary my-2 my-sm-0">
                             Profiles
